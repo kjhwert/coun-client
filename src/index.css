@@ -1,13 +1,56 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.animate-spin {
+    animation: spin 1s linear infinite;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.animate-ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+    0% {
+        transform: scale(1);
+        opacity: 1
+    }
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.header-fade-in {
+    animation: fade-in 1s 0.5s 1 linear alternate forwards;
+}
+
+@keyframes fade-in {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+        padding-top:100px;
+    }
+
+    1% {
+        visibility: visible;
+        opacity: 0;
+    }
+
+    100% {
+        visibility: visible;
+        opacity: 1;
+        padding-top:0;
+    }
 }
