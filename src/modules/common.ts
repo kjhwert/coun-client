@@ -26,3 +26,7 @@ export const getDay = (value: Date): string => {
   const day = date.getDate();
   return `${day}`;
 };
+
+export const TALK_GROWTH = 11;
+export const TALK_REVIEW = 12;
+export const TALK_WRITE = 13;
