@@ -12,6 +12,8 @@ import Home from "./features/home/Home";
 import Header from "./modules/components/Header";
 import Banner from "./modules/components/Banner";
 import Footer from "./modules/components/Footer";
+import TalkDetail from "./features/talk/TalkDetail";
+import Reserve from "./features/reserve/Reserve";
 
 export default () => {
   return (
@@ -20,10 +22,10 @@ export default () => {
       <Banner />
       <Switch>
         <Route path="/" exact component={Home} />
-        {/*<Route path="/reserve" component={ReserveContainer} />*/}
+        <Route path="/reserve" component={Reserve} />
         <Route path="/talk" exact component={Talk} />
         {/*<Route path="/talk/register" component={TalkRegisterContainer} />*/}
-        {/*<Route path="/talk/:id" component={TalkDetailContainer} />*/}
+        <Route path="/talk/:id" component={TalkDetail} />
         {/*<Route path="/interview" exact component={InterviewContainer} />*/}
         {/*<Route path="/interview/:id" component={InterviewDetailContainer} />*/}
         {/*<Route path="/gallery" exact component={GalleryContainer} />*/}

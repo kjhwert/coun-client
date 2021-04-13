@@ -40,6 +40,11 @@ const initialState: TalkState = {
   },
 };
 
+export const show = createAsyncThunk("talk/show", async (id: number) => {
+  const { data } = await api.get(`talk/${id}`);
+  return data;
+});
+
 export const index = createAsyncThunk(
   "talk/index",
   async ({ page, type }: Index) => {

@@ -24,9 +24,7 @@ const Header = () => {
               pathname === "/talk" ? FOCUSED : UNFOCUSED
             } mr-4 cursor-pointer`}
           >
-            <div onClick={() => {}}>
-              <Link to="/talk">BLOG</Link>
-            </div>
+            <Link to="/talk">BLOG</Link>
           </li>
           <li
             className={`${
