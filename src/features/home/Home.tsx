@@ -1,15 +1,15 @@
 import React from "react";
-import { Process, process } from "../../data/process";
+import { process } from "../../data/process";
 import Fields from "./Fields";
 import Profiles from "./Profiles";
 import center from "../../assets/img/center.jpg";
 
-const container = "flex flex-col lg:w-web mx-auto py-4 px-20";
+const container = "flex flex-col lg:w-web mx-auto lg:pt-20 lg:px-20 px-4";
 const introduce = "flex flex-col lg:flex-row";
 
 const Home = () => {
   return (
-    <div className="pt-20">
+    <div>
       <div className={container}>
         <div className={introduce}>
           <div className="lg:w-1/2 lg:self-center lg:py-0 py-6 px-4">
@@ -41,11 +41,13 @@ const Home = () => {
           <img src={center} alt="img" className="w-full lg:w-1/2" />
         </div>
       </div>
-      <div className="flex flex-col lg:w-web mx-auto p-24">
-        <div className="w-full flex justify-center lg:my-4">
-          {process.map((item: Process, idx: number) => (
+      <div className="flex flex-col lg:w-web mx-auto lg:p-24 mt-8">
+        <div className="w-full flex flex-wrap lg:flex-nowrap justify-center lg:my-4">
+          {process.map((item, idx) => (
             <div
-              className="w-1/2 lg:w-1/4 p-4 mr-4 bg-white shadow-lg border border-main-100 flex flex-col items-center rounded"
+              className={`w-36 lg:w-1/4 p-4 ${idx % 2 === 0 && "mr-4"} ${
+                idx <= 1 && "mb-4"
+              } bg-white shadow-lg border border-main-100 flex flex-col items-center rounded`}
               key={idx}
             >
               <img src={item.img} alt="img" className="w-24" />

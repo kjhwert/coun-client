@@ -10,7 +10,7 @@ const Banner = () => {
       >
         <div
           className="flex justify-center items-center w-full h-full text-white
-                text-4xl lg:text-6xl font-semibold header-fade-in invisible"
+                text-3xl lg:text-6xl font-semibold header-fade-in invisible"
         >
           동탄가정심리상담소
         </div>

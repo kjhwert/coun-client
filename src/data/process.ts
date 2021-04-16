@@ -11,7 +11,7 @@ export interface Process {
 
 export type Processes = Array<Process>;
 
-export const process = [
+export const process: Processes = [
   {
     title: "초기면담",
     img: Process1,

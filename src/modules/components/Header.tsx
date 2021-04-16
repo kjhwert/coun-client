@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import Menu from "../../assets/icon/menu.png";
 
 const FOCUSED = "text-main-500 font-bold";
 const UNFOCUSED = "text-main-300";
@@ -8,9 +9,12 @@ const Header = () => {
   const { pathname } = useLocation();
 
   return (
-    <div className="fixed top-0 z-20 w-full h-20 bg-white shadow-xl flex justify-between items-center p-10">
-      <Link to="/">LOGO</Link>
-      <div className="flex items-center">
+    <div className="fixed top-0 z-20 w-full lg:h-20 h-16 bg-white shadow-xl flex justify-between items-center lg:p-10 pl-6">
+      <Link to="/" className="lg:flex hidden">
+        LOGO
+      </Link>
+      <img src={Menu} alt="" className="flex lg:hidden w-8 h-8" />
+      <div className="items-center lg:flex hidden">
         <ul className="flex">
           <li
             className={`mr-4 cursor-pointer ${

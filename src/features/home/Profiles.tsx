@@ -5,10 +5,7 @@ const Profiles = () => {
   const [selected, setSelected] = useState<Profile>(profiles[0]);
 
   return (
-    <div
-      className="flex flex-row mx-auto p-20"
-      style={{ width: "1200px", height: "850px" }}
-    >
+    <div className="flex flex-row mx-auto p-20 lg:w-web">
       <div className="w-1/3 flex lg:overflow-auto lg:flex-wrap flex-col items-center justify-center">
         <div>
           <h3 className="py-6 font-semibold text-lg lg:text-xl">
@@ -18,10 +15,7 @@ const Profiles = () => {
         </div>
       </div>
       <div className="w-2/3 flex items-center">
-        <div
-          style={{ height: "450px" }}
-          className="flex lg:flex-wrap justify-end items-center"
-        >
+        <div className="flex lg:flex-wrap overflow-x-scroll justify-end items-center">
           {profiles.map((item) => (
             <div
               key={item.id}
