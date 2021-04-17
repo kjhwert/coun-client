@@ -1,10 +1,9 @@
 import React from "react";
-import { process } from "../../data/process";
+import { processes } from "../../data/process";
 import Fields from "./Fields";
-import Profiles from "./Profiles";
 import center from "../../assets/img/center.jpg";
 
-const container = "flex flex-col lg:w-web mx-auto lg:pt-20 lg:px-20 px-4";
+const container = "flex flex-col lg:w-web mx-auto lg:pt-20 lg:px-20 px-4 mt-10";
 const introduce = "flex flex-col lg:flex-row";
 
 const Home = () => {
@@ -12,7 +11,7 @@ const Home = () => {
     <div>
       <div className={container}>
         <div className={introduce}>
-          <div className="lg:w-1/2 lg:self-center lg:py-0 py-6 px-4">
+          <div className="lg:w-1/2 lg:self-center lg:py-0 pb-6 px-4">
             <h1 className="font-semibold text-lg">
               동탄가정심리상담소는
               <br />
@@ -41,29 +40,28 @@ const Home = () => {
           <img src={center} alt="img" className="w-full lg:w-1/2" />
         </div>
       </div>
-      <div className="flex flex-col lg:w-web mx-auto lg:p-24 mt-8">
+      <div className="flex flex-col lg:w-web mx-auto lg:p-24 mt-10">
         <div className="w-full flex flex-wrap lg:flex-nowrap justify-center lg:my-4">
-          {process.map((item, idx) => (
+          {processes.map((process, idx) => (
             <div
-              className={`w-36 lg:w-1/4 p-4 ${idx % 2 === 0 && "mr-4"} ${
+              className={`w-36 lg:w-1/4 p-4 lg:mr-4 lg:mb-4 ${idx % 2 === 0 && "mr-4"} ${
                 idx <= 1 && "mb-4"
               } bg-white shadow-lg border border-main-100 flex flex-col items-center rounded`}
               key={idx}
             >
-              <img src={item.img} alt="img" className="w-24" />
+              <img src={process.img} alt="img" className="w-24" />
               <span className="text-sm lg:text-lg text-center">
-                {item.title}
+                {process.title}
               </span>
               <p className="text-xs lg:mt-2 mt-1 lg:text-sm lg:w-4/6 text-center">
-                {item.content}
+                {process.content}
               </p>
             </div>
           ))}
         </div>
       </div>
       <Fields />
-      <Profiles />
-      <h3 className="px-4 pt-6 font-semibold text-lg lg:pt-12 lg:text-xl mb-4">
+      <h3 className="px-4 mt-10 font-semibold text-lg lg:pt-12 lg:text-xl mb-4">
         오시는 길
       </h3>
       <div className="flex justify-center items-center">{/*    Map    */}</div>

@@ -16,7 +16,7 @@ export type Profiles = Array<Profile>;
 
 export const profiles = [
   {
-    id: 0,
+    id: 1,
     name: "김여환 선생님",
     img: Profile1,
     content: `
@@ -62,7 +62,7 @@ export const profiles = [
         `,
   },
   {
-    id: 1,
+    id: 2,
     name: "서민지 선생님",
     img: Profile2,
     content: `
@@ -94,7 +94,7 @@ export const profiles = [
         `,
   },
   {
-    id: 2,
+    id: 3,
     name: "노윤정 선생님",
     img: Profile3,
     content: `
@@ -124,7 +124,7 @@ export const profiles = [
         `,
   },
   {
-    id: 3,
+    id: 4,
     name: "김옥환 선생님",
     img: Profile4,
     content: `
@@ -169,7 +169,7 @@ export const profiles = [
         `,
   },
   {
-    id: 4,
+    id: 5,
     name: "김현경 선생님",
     img: Profile5,
     content: `
@@ -200,7 +200,7 @@ export const profiles = [
         `,
   },
   {
-    id: 5,
+    id: 6,
     name: "김성하 선생님",
     img: Profile6,
     content: `

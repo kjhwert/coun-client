@@ -9,10 +9,7 @@ const Header = () => {
   const { pathname } = useLocation();
 
   return (
-    <div className="fixed top-0 z-20 w-full lg:h-20 h-16 bg-white shadow-xl flex justify-between items-center lg:p-10 pl-6">
-      <Link to="/" className="lg:flex hidden">
-        LOGO
-      </Link>
+    <div className="fixed top-0 z-20 w-full lg:h-20 h-16 bg-white shadow-xl flex lg:justify-end items-center lg:p-10 pl-6">
       <img src={Menu} alt="" className="flex lg:hidden w-8 h-8" />
       <div className="items-center lg:flex hidden">
         <ul className="flex">
@@ -22,6 +19,13 @@ const Header = () => {
             }`}
           >
             <Link to="/">HOME</Link>
+          </li>
+          <li
+              className={`${
+                  pathname === "/profile" ? FOCUSED : UNFOCUSED
+              } mr-4 cursor-pointer`}
+          >
+            <Link to="/profile">THERAPISTS</Link>
           </li>
           <li
             className={`${

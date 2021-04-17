@@ -5,8 +5,8 @@ const Profiles = () => {
   const [selected, setSelected] = useState<Profile>(profiles[0]);
 
   return (
-    <div className="flex flex-row mx-auto p-20 lg:w-web">
-      <div className="w-1/3 flex lg:overflow-auto lg:flex-wrap flex-col items-center justify-center">
+    <div className="flex flex-row mx-auto p-20 lg:w-web lg:h-web">
+      <div className="w-1/3 flex lg:overflow-auto lg:flex-wrap flex-col justify-center">
         <div>
           <h3 className="py-6 font-semibold text-lg lg:text-xl">
             {selected.name}

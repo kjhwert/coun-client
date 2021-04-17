@@ -14,6 +14,7 @@ import Banner from "./modules/components/Banner";
 import Footer from "./modules/components/Footer";
 import TalkDetail from "./features/talk/TalkDetail";
 import Reserve from "./features/reserve/Reserve";
+import Profiles from "./features/home/Profiles";
 
 export default () => {
   return (
@@ -24,8 +25,8 @@ export default () => {
         <Route path="/" exact component={Home} />
         <Route path="/reserve" component={Reserve} />
         <Route path="/talk" exact component={Talk} />
-        {/*<Route path="/talk/register" component={TalkRegisterContainer} />*/}
         <Route path="/talk/:id" component={TalkDetail} />
+          <Route path="/profile" exact component={Profiles} />
         {/*<Route path="/interview" exact component={InterviewContainer} />*/}
         {/*<Route path="/interview/:id" component={InterviewDetailContainer} />*/}
         {/*<Route path="/gallery" exact component={GalleryContainer} />*/}
