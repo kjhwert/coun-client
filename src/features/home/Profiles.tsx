@@ -5,8 +5,8 @@ const Profiles = () => {
   const [selected, setSelected] = useState<Profile>(profiles[0]);
 
   return (
-    <div className="flex flex-row mx-auto p-20 lg:w-web lg:h-web">
-      <div className="w-1/3 flex lg:overflow-auto lg:flex-wrap flex-col justify-center">
+    <div className="flex lg:flex-row flex-col-reverse mx-auto my-10 lg:mt-0 lg:p-20 lg:w-web lg:h-web">
+      <div className="lg:w-1/3 w-full flex lg:flex-wrap flex-col justify-center pl-4 lg:pl-0">
         <div>
           <h3 className="py-6 font-semibold text-lg lg:text-xl">
             {selected.name}
@@ -14,23 +14,22 @@ const Profiles = () => {
           <p dangerouslySetInnerHTML={{ __html: selected.content }} />
         </div>
       </div>
-      <div className="w-2/3 flex items-center">
-        <div className="flex lg:flex-wrap overflow-x-scroll justify-end items-center">
-          {profiles.map((item) => (
+      <div className="lg:w-2/3 w-full flex items-center overflow-x-scroll">
+        <div className="flex lg:flex-wrap justify-end items-center ml-4 mr-4">
+          {profiles.map((profile) => (
             <div
-              key={item.id}
-              className="lg:cursor-pointer items-center lg:m-4 flex flex-col"
-              style={{ width: "170px" }}
+              key={profile.id}
+              className="lg:cursor-pointer items-center mr-2 lg:m-4 flex flex-col w-36 lg:w-40"
               onClick={() => {
-                setSelected(item);
+                setSelected(profile);
               }}
             >
               <img
-                src={item.img}
+                src={profile.img}
                 alt="profile"
-                className="w-full rounded-full"
+                className="w-full rounded-full mb-4"
               />
-              <span>{item.name}</span>
+              <span>{profile.name}</span>
             </div>
           ))}
         </div>
