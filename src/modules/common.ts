@@ -30,3 +30,5 @@ export const getDay = (value: Date): string => {
 export const TALK_GROWTH = 11;
 export const TALK_REVIEW = 12;
 export const TALK_WRITE = 13;
+export const RESERVE_FIELDS = 1;
+export const RESERVE_PLACE = 2;
