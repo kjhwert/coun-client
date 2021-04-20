@@ -14,6 +14,10 @@ export default ({ match }: RouteComponentProps<Params>) => {
     return <Redirect to="/404" />;
   }
 
+  /**
+   * QUESTION
+   * 1. list는 data로 관리한다고 했을 때, 상세페이지는 어떻게 관리하는지.
+   * */
   //TODO 상세 페이지의 코드가 너무 마음에 안들어. 이렇게 안할거 같은데.
   const [state, setState] = useState<Talk | null>(null);
   const dispatch = useAppDispatch();
