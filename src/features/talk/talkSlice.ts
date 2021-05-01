@@ -1,4 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  createEntityAdapter,
+} from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { api } from "../../modules/api";
 import { HttpStatus } from "../../modules/httpStatus";

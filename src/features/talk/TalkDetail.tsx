@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Redirect, RouteComponentProps } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { show, Talk, talkStatus } from "./talkSlice";
 import Loading from "../../modules/components/Loading";
 
@@ -11,7 +10,7 @@ interface Params {
 
 export default ({ match }: RouteComponentProps<Params>) => {
   if (!match.params.id) {
-    return <Redirect to="/404" />;
+    return <Redirect to="/talk" />;
   }
 
   /**
@@ -22,6 +21,7 @@ export default ({ match }: RouteComponentProps<Params>) => {
   const [state, setState] = useState<Talk | null>(null);
   const dispatch = useAppDispatch();
   const { status } = useAppSelector(talkStatus);
+
   const getTalk = async () => {
     const { payload } = await dispatch(show(Number(match.params.id)));
     setState(payload.data);
@@ -31,9 +31,11 @@ export default ({ match }: RouteComponentProps<Params>) => {
     getTalk();
   }, [dispatch]);
 
-  return state === null ? (
-    <Loading />
-  ) : (
+  if (state === null) {
+    return <Loading />;
+  }
+
+  return (
     <div className="flex justify-center my-16">
       <div style={{ width: "1000px" }} className="flex items-center flex-col">
         <h1 className="font-bold text-2xl mb-8">{state.title}</h1>

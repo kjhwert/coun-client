@@ -33,5 +33,5 @@ export const TALK_WRITE = 13;
 
 export type ReserveFields = 1;
 export type ReservePlaces = 2;
-export const RESERVE_FIELDS = 1;
-export const RESERVE_PLACE = 2;
+export const RESERVE_FIELDS: ReserveFields = 1;
+export const RESERVE_PLACE: ReservePlaces = 2;
