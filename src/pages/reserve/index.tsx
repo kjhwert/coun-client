@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { codeStatus, getCodes } from "../../features/code/codeSlice";
 import Loading from "../../shared/components/Loading";
 import { create } from "../../features/reserve/reserveSlice";
-import { RESERVE_FIELDS } from "../../shared/code";
+import { RESERVE_FIELDS, RESERVE_PLACES } from "../../shared/code";
 
 const inputStyle = `focus:outline-none text-sm focus:placeholder-transparent rounded-none
                         mb-6 border-b border-main-200 p-2 placeholder-main-200`;
@@ -50,7 +50,7 @@ const initState = {
 };
 
 const Index = () => {
-  const { status, codes } = useAppSelector(codeStatus);
+  const { status, fields } = useAppSelector(codeStatus);
   const dispatch = useAppDispatch();
   const history = useHistory();
   const [state, setState] = useState<Reserve>(initState);
@@ -88,6 +88,7 @@ const Index = () => {
 
   useEffect(() => {
     dispatch(getCodes(RESERVE_FIELDS));
+    dispatch(getCodes(RESERVE_PLACES));
   }, [dispatch]);
 
   if (status === "loading") {
@@ -154,7 +155,7 @@ const Index = () => {
         </div>
         <div className="flex flex-col mb-6">
           <h6 className="mb-1">상담분야를 선택해주세요. *</h6>
-          {codes.map(({ id, description }) => (
+          {fields.map(({ id, description }) => (
             <label htmlFor={description} className={radioStyle} key={id}>
               <input
                 type="radio"
