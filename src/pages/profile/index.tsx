@@ -1,19 +1,18 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Loading from "../../shared/components/Loading";
 import {
   getProfiles,
-  Profile,
   profileSelector,
 } from "../../features/profile/profileSlice";
 import { BASE_URL } from "../../shared/common";
+import { onSelected } from "../../features/profile/profile.actions";
 
 interface Props {}
 
 const Index: FC<Props> = () => {
-  const { profiles, status } = useAppSelector(profileSelector);
+  const { profiles, status, selected } = useAppSelector(profileSelector);
   const dispatch = useAppDispatch();
-  const [selected, setSelected] = useState<Profile | null>(profiles[0]);
 
   useEffect(() => {
     dispatch(getProfiles());
@@ -40,7 +39,7 @@ const Index: FC<Props> = () => {
               key={profile.id}
               className="lg:cursor-pointer items-center mr-2 lg:m-4 flex flex-col w-36 lg:w-40"
               onClick={() => {
-                setSelected(profile);
+                dispatch(onSelected(profile));
               }}
             >
               <img

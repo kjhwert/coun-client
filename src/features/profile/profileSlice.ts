@@ -25,11 +25,13 @@ export interface Profile {
 
 export interface ProfileState {
   profiles: Profile[];
+  selected: Profile | null;
   status: "idle" | "loading" | "failed";
 }
 
 const initialState: ProfileState = {
   profiles: [],
+  selected: null,
   status: "idle",
 };
 
@@ -41,7 +43,11 @@ export const getProfiles = createAsyncThunk("user/getTeachers", async () => {
 export const profileSlice = createSlice({
   name: "profile",
   initialState,
-  reducers: {},
+  reducers: {
+    onSelected: (state, { payload }) => {
+      state.selected = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getProfiles.pending, (state) => {
@@ -50,6 +56,7 @@ export const profileSlice = createSlice({
       .addCase(getProfiles.fulfilled, (state, { payload }) => {
         state.status = "idle";
         state.profiles = payload;
+        state.selected = payload[0];
       })
       .addCase(getProfiles.rejected, (state, { error }) => {
         notify.error(error.message);
