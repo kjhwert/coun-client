@@ -1,10 +1,10 @@
 import React from "react";
-import Introduction from "./Introduction";
-import Processes from "./Processes";
-import Fields from "./Fields";
-import WayToCome from "./WayToCome";
+import Introduction from "./components/Introduction";
+import Processes from "./components/Processes";
+import Fields from "./components/Fields";
+import WayToCome from "./components/WayToCome";
 
-const index = () => {
+const Index = () => {
   return (
     <>
       <Introduction />
@@ -15,4 +15,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

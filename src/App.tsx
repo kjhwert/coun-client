@@ -1,5 +1,5 @@
 import React from "react";
-import TalkList from "./pages/talk/TalkList";
+import TalkList from "./pages/talk";
 import {
   BrowserRouter as Router,
   Switch,

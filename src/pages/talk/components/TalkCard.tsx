@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { ITalk } from "../../features/talk/talk";
-import { getDay, getMonth } from "../common";
+import { ITalk } from "../../../features/talk/talk";
+import { getDay, getMonth } from "../../../shared/common";
 import { Link } from "react-router-dom";
 
 interface Props {

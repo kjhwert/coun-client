@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import center from "../../assets/img/center.jpg";
+import center from "../../../assets/img/center.jpg";
 
 interface Props {}
 

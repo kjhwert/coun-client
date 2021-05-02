@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import fields, { Field } from "../../data/fields";
+import fields, { Field } from "../../../data/fields";
 
 const Fields = () => {
   const [selected, setSelected] = useState<Field>(fields[0]);
@@ -28,7 +28,10 @@ const Fields = () => {
           <h3 className="py-6 font-semibold text-lg lg:pt-12 lg:text-xl">
             {selected.name}
           </h3>
-          <p dangerouslySetInnerHTML={{ __html: selected.content }} className='text-sm mb-4 lg:text-base lg:mb-0' />
+          <p
+            dangerouslySetInnerHTML={{ __html: selected.content }}
+            className="text-sm mb-4 lg:text-base lg:mb-0"
+          />
         </div>
       </div>
     </div>

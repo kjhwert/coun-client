@@ -3,9 +3,9 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { talksSelector } from "../../features/talk/talkSlice";
 import Loading from "../../shared/components/Loading";
 import { ITalkPagination } from "../../features/talk/talk";
-import TalkCard from "../../shared/components/TalkCard";
+import TalkCard from "./components/TalkCard";
 import talkTypeCard from "../../data/talkTypeCards";
-import TalkTypeCard from "../../shared/components/TalkTypeCard";
+import TalkTypeCard from "./components/TalkTypeCard";
 import { getTalks } from "../../features/talk/talk.actions";
 
 const TalkList = () => {

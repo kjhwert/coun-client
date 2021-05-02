@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { processes } from "../../data/process";
+import { processes } from "../../../data/process";
 
 interface Props {}
 
