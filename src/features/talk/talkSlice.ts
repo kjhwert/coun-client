@@ -25,10 +25,11 @@ export const talkSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getTalks.fulfilled, (state, { payload }) => {
+        if (payload.pagination.page === 1) {
+          state.talks = payload.data.talks;
+        }
         if (payload.pagination.page !== 1) {
           state.talks = state.talks.concat(payload.data.talks);
-        } else {
-          state.talks = payload.data.talks;
         }
         state.status = "idle";
         state.totalCount = payload.data.totalCount;
