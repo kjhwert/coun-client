@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:3001/";
+export const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 export const months = [
   "Jan",
@@ -26,12 +26,3 @@ export const getDay = (value: Date): string => {
   const day = date.getDate();
   return `${day}`;
 };
-
-export const TALK_GROWTH = 11;
-export const TALK_REVIEW = 12;
-export const TALK_WRITE = 13;
-
-export type ReserveFields = 1;
-export type ReservePlaces = 2;
-export const RESERVE_FIELDS: ReserveFields = 1;
-export const RESERVE_PLACE: ReservePlaces = 2;

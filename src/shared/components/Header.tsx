@@ -13,6 +13,7 @@ const Header = () => {
       <img src={Menu} alt="" className="flex lg:hidden w-8 h-8" />
       <div className="items-center lg:flex hidden">
         <ul className="flex">
+          {/*TODO 반복 제거하기*/}
           <li
             className={`mr-4 cursor-pointer ${
               pathname === "/" ? FOCUSED : UNFOCUSED
@@ -21,29 +22,29 @@ const Header = () => {
             <Link to="/">HOME</Link>
           </li>
           <li
-              className={`${
-                  pathname === "/profile" ? FOCUSED : UNFOCUSED
-              } mr-4 cursor-pointer`}
+            className={`${
+              pathname.includes("profile") ? FOCUSED : UNFOCUSED
+            } mr-4 cursor-pointer`}
           >
             <Link to="/profile">THERAPISTS</Link>
           </li>
           <li
             className={`${
-              pathname === "/talk" ? FOCUSED : UNFOCUSED
+              pathname.includes("talk") ? FOCUSED : UNFOCUSED
             } mr-4 cursor-pointer`}
           >
             <Link to="/talk">BLOG</Link>
           </li>
           <li
             className={`${
-              pathname === "/interview" ? FOCUSED : UNFOCUSED
+              pathname.includes("interview") ? FOCUSED : UNFOCUSED
             } mr-4 cursor-pointer`}
           >
             <Link to="/interview">INTERVIEW</Link>
           </li>
           <li
             className={`${
-              pathname === "/gallery" ? FOCUSED : UNFOCUSED
+              pathname.includes("gallery") ? FOCUSED : UNFOCUSED
             } mr-10 cursor-pointer`}
           >
             <Link to="/gallery">GALLERY</Link>

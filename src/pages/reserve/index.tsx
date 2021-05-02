@@ -1,15 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { api } from "../../modules/api";
-import { RESERVE_FIELDS } from "../../modules/common";
-import { HttpStatus } from "../../modules/httpStatus";
-import { notify } from "../../modules/notify";
+import { notify } from "../../shared/notify";
 import { useHistory } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { codeStatus, index } from "../code/codeSlice";
-import Loading from "../../modules/components/Loading";
-import { create } from "./reserveSlice";
+import { codeStatus, getCodes } from "../../features/code/codeSlice";
+import Loading from "../../shared/components/Loading";
+import { create } from "../../features/reserve/reserveSlice";
+import { RESERVE_FIELDS } from "../../shared/code";
 
 const inputStyle = `focus:outline-none text-sm focus:placeholder-transparent rounded-none
                         mb-6 border-b border-main-200 p-2 placeholder-main-200`;
@@ -51,8 +49,8 @@ const initState = {
   description: "",
 };
 
-export default () => {
-  const { status, data: fields } = useAppSelector(codeStatus);
+const Index = () => {
+  const { status, codes } = useAppSelector(codeStatus);
   const dispatch = useAppDispatch();
   const history = useHistory();
   const [state, setState] = useState<Reserve>(initState);
@@ -76,7 +74,7 @@ export default () => {
     const {
       payload: { statusCode, message },
     } = await dispatch(create(result));
-    if (statusCode !== HttpStatus.OK) {
+    if (statusCode !== 201) {
       return notify.warning(message);
     }
     /**
@@ -89,8 +87,8 @@ export default () => {
   };
 
   useEffect(() => {
-    dispatch(index(RESERVE_FIELDS));
-  }, []);
+    dispatch(getCodes(RESERVE_FIELDS));
+  }, [dispatch]);
 
   if (status === "loading") {
     return <Loading />;
@@ -156,7 +154,7 @@ export default () => {
         </div>
         <div className="flex flex-col mb-6">
           <h6 className="mb-1">상담분야를 선택해주세요. *</h6>
-          {fields.map(({ id, description }) => (
+          {codes.map(({ id, description }) => (
             <label htmlFor={description} className={radioStyle} key={id}>
               <input
                 type="radio"
@@ -246,3 +244,5 @@ export default () => {
     </div>
   );
 };
+
+export default Index;

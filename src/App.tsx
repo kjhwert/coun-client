@@ -1,5 +1,5 @@
-import React  from "react";
-import Talk from "./features/talk/Talk";
+import React from "react";
+import TalkList from "./pages/talk/TalkList";
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,16 +7,16 @@ import {
   Redirect,
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import NotFound from "./modules/components/NotFound";
-import Home from "./features/home/Home";
-import Header from "./modules/components/Header";
-import Banner from "./modules/components/Banner";
-import Footer from "./modules/components/Footer";
-import TalkDetail from "./features/talk/TalkDetail";
-import Reserve from "./features/reserve/Reserve";
-import Profiles from "./features/home/Profiles";
+import NotFound from "./shared/components/NotFound";
+import Home from "./pages/home";
+import Header from "./shared/components/Header";
+import Banner from "./shared/components/Banner";
+import Footer from "./shared/components/Footer";
+import Talk from "./pages/talk/Talk";
+import Reserve from "./pages/reserve";
+import Profile from "./pages/profile";
 
-export default () => {
+const App = () => {
   return (
     <Router>
       <Header />
@@ -24,9 +24,9 @@ export default () => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/reserve" component={Reserve} />
-        <Route path="/talk" exact component={Talk} />
-        <Route path="/talk/:id" component={TalkDetail} />
-          <Route path="/profile" exact component={Profiles} />
+        <Route path="/talk" exact component={TalkList} />
+        <Route path="/talk/:id" component={Talk} />
+        <Route path="/profile" exact component={Profile} />
         {/*<Route path="/interview" exact component={InterviewContainer} />*/}
         {/*<Route path="/interview/:id" component={InterviewDetailContainer} />*/}
         {/*<Route path="/gallery" exact component={GalleryContainer} />*/}
@@ -39,3 +39,5 @@ export default () => {
     </Router>
   );
 };
+
+export default App;

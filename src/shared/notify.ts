@@ -16,7 +16,7 @@ export const notify = {
   warning: (message: string) => {
     toast.warning(message, notifyOptions);
   },
-  error: (message: string) => {
+  error: (message: string | undefined) => {
     toast.error(message, notifyOptions);
   },
 };

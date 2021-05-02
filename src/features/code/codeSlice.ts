@@ -1,9 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ReserveFields, ReservePlaces } from "../../modules/common";
-import { api } from "../../modules/api";
+import { api } from "../../shared/api";
 import { RootState } from "../../app/store";
-import { HttpStatus } from "../../modules/httpStatus";
-import { notify } from "../../modules/notify";
+import { I_RESERVE_FIELDS, I_RESERVE_PLACES } from "../../shared/code";
+import { notify } from "../../shared/notify";
 
 export interface Code {
   id: number;
@@ -11,20 +10,18 @@ export interface Code {
 }
 
 export interface CodeState {
-  data: Array<Code>;
+  codes: Array<Code>;
   status: "idle" | "loading" | "failed";
-  message: string | undefined;
 }
 
 const initialState: CodeState = {
-  data: [],
+  codes: [],
   status: "idle",
-  message: "",
 };
 
-export const index = createAsyncThunk(
-  "code/index",
-  async (groupId: ReserveFields | ReservePlaces) => {
+export const getCodes = createAsyncThunk(
+  "code/getCodes",
+  async (groupId: I_RESERVE_FIELDS | I_RESERVE_PLACES) => {
     const { data } = await api.get(`code?groupId=${groupId}`);
     return data;
   }
@@ -36,17 +33,15 @@ export const codeSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(index.pending, (state) => {
+      .addCase(getCodes.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(index.fulfilled, (state, { payload }) => {
-        if (payload.statusCode === HttpStatus.OK) {
-          state.data = payload.data;
-          state.status = "idle";
-          return;
-        }
-        //TODO Message array 형식으로 줌
-        notify.warning(payload.message);
+      .addCase(getCodes.fulfilled, (state, { payload }) => {
+        state.codes = payload.data;
+        state.status = "idle";
+      })
+      .addCase(getCodes.rejected, (state, { error }) => {
+        notify.error(error.message);
       });
   },
 });

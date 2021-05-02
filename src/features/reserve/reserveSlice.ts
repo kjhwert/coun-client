@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { api } from "../../modules/api";
-import { HttpStatus } from "../../modules/httpStatus";
-import { notify } from "../../modules/notify";
+import { api } from "../../shared/api";
 
 export interface ReserveState {
   status: "idle" | "loading" | "failed";
@@ -42,11 +40,7 @@ export const reserveSlice = createSlice({
         state.status = "loading";
       })
       .addCase(create.fulfilled, (state, { payload }) => {
-        if (payload.statusCode === HttpStatus.OK) {
-          state.status = "idle";
-          return;
-        }
-        state.status = "failed";
+        state.status = "idle";
       });
   },
 });

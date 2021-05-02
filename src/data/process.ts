@@ -3,15 +3,13 @@ import Process2 from "../assets/icon/process2.png";
 import Process3 from "../assets/icon/process3.png";
 import Process4 from "../assets/icon/process4.png";
 
-export interface Process {
+export interface IProcess {
   title: string;
   img: string;
   content: string;
 }
 
-export type Processes = Array<Process>;
-
-export const processes: Processes = [
+export const processes: IProcess[] = [
   {
     title: "초기면담",
     img: Process1,

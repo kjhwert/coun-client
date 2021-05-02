@@ -1,8 +1,27 @@
-import React, { useState } from "react";
-import { Profile, profiles } from "../../data/profiles";
+import React, { FC, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import Loading from "../../shared/components/Loading";
+import {
+  getProfiles,
+  Profile,
+  profileSelector,
+} from "../../features/profile/profileSlice";
+import { BASE_URL } from "../../shared/common";
 
-const Profiles = () => {
-  const [selected, setSelected] = useState<Profile>(profiles[0]);
+interface Props {}
+
+const Index: FC<Props> = () => {
+  const { profiles, status } = useAppSelector(profileSelector);
+  const dispatch = useAppDispatch();
+  const [selected, setSelected] = useState<Profile | null>(profiles[0]);
+
+  useEffect(() => {
+    dispatch(getProfiles());
+  }, [dispatch]);
+
+  if (!selected || status === "loading") {
+    return <Loading />;
+  }
 
   return (
     <div className="flex lg:flex-row flex-col-reverse mx-auto my-10 lg:mt-0 lg:p-20 lg:w-web lg:h-web">
@@ -11,7 +30,7 @@ const Profiles = () => {
           <h3 className="py-6 font-semibold text-lg lg:text-xl">
             {selected.name}
           </h3>
-          <p dangerouslySetInnerHTML={{ __html: selected.content }} />
+          <p dangerouslySetInnerHTML={{ __html: selected.description }} />
         </div>
       </div>
       <div className="lg:w-2/3 w-full flex items-center overflow-x-scroll">
@@ -25,7 +44,7 @@ const Profiles = () => {
               }}
             >
               <img
-                src={profile.img}
+                src={`${BASE_URL}${profile.image.path}`}
                 alt="profile"
                 className="w-full rounded-full mb-4"
               />
@@ -38,4 +57,4 @@ const Profiles = () => {
   );
 };
 
-export default Profiles;
+export default Index;
