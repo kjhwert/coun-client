@@ -22,6 +22,7 @@ export interface ITalk {
 
 export interface ITalkState {
   talks: Array<ITalk>;
+  selected: ITalk | undefined;
   status: "idle" | "loading" | "failed";
   pagination: {
     page: number;

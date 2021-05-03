@@ -3,10 +3,11 @@ import { RootState } from "../../app/store";
 import { TALK_GROWTH } from "../../shared/code";
 import { ITalkState } from "./talk";
 import { notify } from "../../shared/notify";
-import { getTalks } from "./talk.actions";
+import { getTalk, getTalks } from "./talk.actions";
 
 const initialState: ITalkState = {
   talks: [],
+  selected: undefined,
   status: "idle",
   pagination: {
     page: 1,
@@ -18,7 +19,11 @@ const initialState: ITalkState = {
 export const talkSlice = createSlice({
   name: "talk",
   initialState,
-  reducers: {},
+  reducers: {
+    onSelected: (state, { payload }) => {
+      state.selected = state.talks.find(({ id }) => payload === id);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getTalks.pending, (state) => {
@@ -37,8 +42,17 @@ export const talkSlice = createSlice({
       })
       .addCase(getTalks.rejected, (state, { error }) => {
         notify.error(error.message);
+      })
+      .addCase(getTalk.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getTalk.fulfilled, (state, { payload }) => {
+        state.status = "idle";
+        state.selected = payload;
       });
   },
 });
+
+export const { onSelected } = talkSlice.actions;
 
 export const talksSelector = (state: RootState) => state.talk;

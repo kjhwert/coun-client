@@ -1,8 +1,7 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Loading from "../../shared/components/Loading";
-import { talksSelector } from "../../features/talk/talkSlice";
-import { ITalk } from "../../features/talk/talk";
+import { talksSelector, onSelected } from "../../features/talk/talkSlice";
 import { getTalk } from "../../features/talk/talk.actions";
 
 interface Props {
@@ -18,40 +17,27 @@ const Talk: FC<Props> = ({
     params: { id },
   },
 }) => {
-  const { talks } = useAppSelector(talksSelector);
-  const [state, setState] = useState<ITalk | null>(null);
+  const { selected } = useAppSelector(talksSelector);
   const dispatch = useAppDispatch();
 
-  const getTalkWhenIsNotListed = async () => {
-    const talkId = Number(id);
-    const talk = talks.find(({ id }) => id === talkId);
-    if (talk) {
-      return setState(talk);
-    }
-
-    //TODO 이렇게 쓰는게 과연 맞을까..?
-    const { payload } = await dispatch(getTalk(Number(id)));
-    setState(payload);
-  };
-
   useEffect(() => {
-    getTalkWhenIsNotListed();
+    dispatch(getTalk(Number(id)));
   }, [dispatch]);
 
-  if (state === null) {
+  if (selected === undefined) {
     return <Loading />;
   }
 
   return (
     <div className="flex justify-center my-16">
       <div style={{ width: "1000px" }} className="flex items-center flex-col">
-        <h1 className="font-bold text-2xl mb-8">{state.title}</h1>
-        {state.youtubeUrl && (
-          <div dangerouslySetInnerHTML={{ __html: state.youtubeUrl }}></div>
+        <h1 className="font-bold text-2xl mb-8">{selected.title}</h1>
+        {selected.youtubeUrl && (
+          <div dangerouslySetInnerHTML={{ __html: selected.youtubeUrl }}></div>
         )}
-        {state.description && (
+        {selected.description && (
           <p
-            dangerouslySetInnerHTML={{ __html: state.description }}
+            dangerouslySetInnerHTML={{ __html: selected.description }}
             className="mt-8"
           />
         )}
