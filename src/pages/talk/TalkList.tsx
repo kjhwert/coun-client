@@ -5,6 +5,7 @@ import Loading from "../../shared/components/Loading";
 import { getTalks } from "../../features/talk/talk.actions";
 import List from "../../shared/components/List";
 import TalkTypeList from "./components/TalkTypeList";
+import Pagination from "../../shared/components/Pagination";
 
 const TalkList = () => {
   const { talks, totalCount, status, pagination } = useAppSelector(
@@ -24,23 +25,17 @@ const TalkList = () => {
     <div className="w-full flex items-center flex-col relative">
       <TalkTypeList />
       <List link="talk" items={talks} />
-      <div className="mt-8 mb-8">
-        {talks.length < totalCount && (
-          <span
-            onClick={() => {
-              dispatch(
-                getTalks({
-                  page: pagination.page + 1,
-                  type: pagination.type,
-                })
-              );
-            }}
-            className="p-4 text-14 text-main-300 cursor-pointer"
-          >
-            more
-          </span>
-        )}
-      </div>
+      <Pagination
+        hasMorePage={talks.length < totalCount}
+        onClick={() => {
+          dispatch(
+            getTalks({
+              page: pagination.page + 1,
+              type: pagination.type,
+            })
+          );
+        }}
+      />
     </div>
   );
 };
