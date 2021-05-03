@@ -2,11 +2,9 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { talksSelector } from "../../features/talk/talkSlice";
 import Loading from "../../shared/components/Loading";
-import { ITalkPagination } from "../../features/talk/talk";
-import TalkCard from "./components/TalkCard";
-import talkTypeCard from "../../data/talkTypeCards";
-import TalkTypeCard from "./components/TalkTypeCard";
 import { getTalks } from "../../features/talk/talk.actions";
+import List from "../../shared/components/List";
+import TalkTypeList from "./components/TalkTypeList";
 
 const TalkList = () => {
   const { talks, totalCount, status, pagination } = useAppSelector(
@@ -14,12 +12,8 @@ const TalkList = () => {
   );
   const dispatch = useAppDispatch();
 
-  const getTalksList = (pagination: ITalkPagination) => {
-    dispatch(getTalks(pagination));
-  };
-
   useEffect(() => {
-    getTalksList(pagination);
+    dispatch(getTalks(pagination));
   }, [dispatch]);
 
   if (status === "loading") {
@@ -28,28 +22,18 @@ const TalkList = () => {
 
   return (
     <div className="w-full flex items-center flex-col relative">
-      <div className="flex mt-4 mb-8 shadow-2xl bg-white flex-shrink-0 cursor-pointer">
-        {talkTypeCard.map((card) => (
-          <TalkTypeCard
-            {...card}
-            key={card.id}
-            onClick={() => getTalksList({ page: 1, type: card.type })}
-          />
-        ))}
-      </div>
-      <div className="flex flex-wrap ml-4" style={{ width: 1200 }}>
-        {talks.map((talk) => (
-          <TalkCard talk={talk} key={talk.id} />
-        ))}
-      </div>
+      <TalkTypeList />
+      <List link="talk" items={talks} />
       <div className="mt-8 mb-8">
         {talks.length < totalCount && (
           <span
             onClick={() => {
-              getTalksList({
-                page: pagination.page + 1,
-                type: pagination.type,
-              });
+              dispatch(
+                getTalks({
+                  page: pagination.page + 1,
+                  type: pagination.type,
+                })
+              );
             }}
             className="p-4 text-14 text-main-300 cursor-pointer"
           >

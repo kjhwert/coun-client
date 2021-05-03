@@ -21,6 +21,7 @@ const Talk: FC<Props> = ({
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    //TODO 리스트에 데이터가 있다면 API request를 보낼 필요가 없는데.. 어떻게 구현할 수 있지?
     dispatch(getTalk(Number(id)));
   }, [dispatch]);
 
