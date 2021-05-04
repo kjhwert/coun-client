@@ -3,6 +3,8 @@ import { codeSlice } from "../features/code/codeSlice";
 import { reserveSlice } from "../features/reserve/reserveSlice";
 import { talkSlice } from "../features/talk/talkSlice";
 import { profileSlice } from "../features/profile/profileSlice";
+import { interviewSlice } from "../features/interview/interviewSlice";
+import { userSlice } from "../features/user/userSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +12,8 @@ export const store = configureStore({
     code: codeSlice.reducer,
     reserve: reserveSlice.reducer,
     profile: profileSlice.reducer,
+    interview: interviewSlice.reducer,
+    user: userSlice.reducer,
   },
 });
 

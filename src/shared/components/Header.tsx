@@ -5,50 +5,39 @@ import Menu from "../../assets/icon/menu.png";
 const FOCUSED = "text-main-500 font-bold";
 const UNFOCUSED = "text-main-300";
 
+interface IRouter {
+  name: string;
+  link: string;
+}
+
+const router: IRouter[] = [
+  { name: "HOME", link: "/" },
+  { name: "THERAPISTS", link: "/profile" },
+  { name: "BLOG", link: "/talk" },
+  { name: "INTERVIEW", link: "/interview" },
+  { name: "GALLERY", link: "/gallery" },
+];
+
 const Header = () => {
   const { pathname } = useLocation();
+
+  const isFocused = (link: string) => {
+    if (pathname === link) {
+      return FOCUSED;
+    }
+    return UNFOCUSED;
+  };
 
   return (
     <div className="fixed top-0 z-20 w-full lg:h-20 h-16 bg-white shadow-xl flex lg:justify-end items-center lg:p-10 pl-6">
       <img src={Menu} alt="" className="flex lg:hidden w-8 h-8" />
       <div className="items-center lg:flex hidden">
         <ul className="flex">
-          {/*TODO 반복 제거하기*/}
-          <li
-            className={`mr-4 cursor-pointer ${
-              pathname === "/" ? FOCUSED : UNFOCUSED
-            }`}
-          >
-            <Link to="/">HOME</Link>
-          </li>
-          <li
-            className={`${
-              pathname.includes("profile") ? FOCUSED : UNFOCUSED
-            } mr-4 cursor-pointer`}
-          >
-            <Link to="/profile">THERAPISTS</Link>
-          </li>
-          <li
-            className={`${
-              pathname.includes("talk") ? FOCUSED : UNFOCUSED
-            } mr-4 cursor-pointer`}
-          >
-            <Link to="/talk">BLOG</Link>
-          </li>
-          <li
-            className={`${
-              pathname.includes("interview") ? FOCUSED : UNFOCUSED
-            } mr-4 cursor-pointer`}
-          >
-            <Link to="/interview">INTERVIEW</Link>
-          </li>
-          <li
-            className={`${
-              pathname.includes("gallery") ? FOCUSED : UNFOCUSED
-            } mr-10 cursor-pointer`}
-          >
-            <Link to="/gallery">GALLERY</Link>
-          </li>
+          {router.map(({ link, name }) => (
+            <li className={`mr-4 cursor-pointer ${isFocused(link)}`} key={name}>
+              <Link to={link}>{name}</Link>
+            </li>
+          ))}
         </ul>
         <Link
           to="/reserve"

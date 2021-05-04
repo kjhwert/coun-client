@@ -4,9 +4,9 @@ import Loading from "../../shared/components/Loading";
 import {
   getProfiles,
   profileSelector,
+  onSelected,
 } from "../../features/profile/profileSlice";
 import { BASE_URL } from "../../shared/common";
-import { onSelected } from "../../features/profile/profile.actions";
 
 interface Props {}
 

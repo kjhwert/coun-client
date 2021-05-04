@@ -64,4 +64,6 @@ export const profileSlice = createSlice({
   },
 });
 
+export const { onSelected } = profileSlice.actions;
+
 export const profileSelector = (state: RootState) => state.profile;
