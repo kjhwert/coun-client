@@ -46,7 +46,7 @@ export const userSlice = createSlice({
         state.user = payload;
       })
       .addCase(userLogin.rejected, (state, action) => {
-        notify.warning("아이디 혹은 비밀번호가 일치하지 않습니다.");
+        notify.warning(["아이디 혹은 비밀번호가 일치하지 않습니다."]);
       });
   },
 });

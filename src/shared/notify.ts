@@ -7,14 +7,14 @@ const notifyOptions: ToastOptions = {
 };
 
 export const notify = {
-  info: (message: string) => {
-    toast.info(message, notifyOptions);
+  info: (messages: string[]) => {
+    messages.map((message) => toast.info(message, notifyOptions));
   },
   success: (message: string) => {
     toast.success(message, notifyOptions);
   },
-  warning: (message: string) => {
-    toast.warning(message, notifyOptions);
+  warning: (messages: string[]) => {
+    messages.map((message) => toast.warning(message, notifyOptions));
   },
   error: (message: string | undefined) => {
     toast.error(message, notifyOptions);

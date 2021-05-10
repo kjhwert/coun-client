@@ -2,35 +2,40 @@ import React, { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { notify } from "../../shared/notify";
-import { useHistory } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { codeStatus, getCodes } from "../../features/code/codeSlice";
 import Loading from "../../shared/components/Loading";
-import { create } from "../../features/reserve/reserveSlice";
 import { RESERVE_FIELDS, RESERVE_PLACES } from "../../shared/code";
+import { api } from "../../shared/api";
 
 const inputStyle = `focus:outline-none text-sm focus:placeholder-transparent rounded-none
                         mb-6 border-b border-main-200 p-2 placeholder-main-200`;
 
 const radioStyle = "text-14 flex items-center mr-1";
 
-const reservableTime = [
-  "10:00",
-  "11:00",
-  "12:00",
-  "14:00",
-  "15:00",
-  "16:00",
-  "17:00",
-  "18:00",
-  "19:00",
-  "20:00",
+interface ReservableTime {
+  name: string;
+  value: number;
+}
+
+const reservableTime: ReservableTime[] = [
+  { name: "10:00", value: 10 },
+  { name: "11:00", value: 11 },
+  { name: "12:00", value: 12 },
+  { name: "13:00", value: 13 },
+  { name: "14:00", value: 14 },
+  { name: "15:00", value: 15 },
+  { name: "16:00", value: 16 },
+  { name: "17:00", value: 17 },
+  { name: "18:00", value: 18 },
+  { name: "19:00", value: 19 },
+  { name: "20:00", value: 20 },
 ];
 
 interface Reserve {
   fieldId: number;
   date: Date;
-  time: string;
+  time: number;
   name: string;
   phone: string;
   placeId: number;
@@ -41,7 +46,7 @@ interface Reserve {
 const initState = {
   fieldId: 0,
   date: new Date(),
-  time: "",
+  time: 0,
   name: "",
   phone: "",
   placeId: 0,
@@ -52,38 +57,35 @@ const initState = {
 const Index = () => {
   const { status, fields } = useAppSelector(codeStatus);
   const dispatch = useAppDispatch();
-  const history = useHistory();
   const [state, setState] = useState<Reserve>(initState);
 
   const reserve = async () => {
     const { date, time, ...rest } = state;
     const reserveDate = date;
-    reserveDate.setHours(+time.substr(0, 2));
+    reserveDate.setHours(time);
     reserveDate.setMinutes(0);
     reserveDate.setSeconds(0);
 
-    if (!rest.name) return notify.warning("성함을 입력해주세요.");
-    if (!rest.phone) return notify.warning("연락처를 입력해주세요.");
-    if (!time) return notify.warning("시간을 선택해주세요.");
-    if (!rest.fieldId) return notify.warning("상담분야를 선택해주세요.");
-    if (!rest.placeId) return notify.warning("상담장소를 선택해주세요.");
-    if (!rest.title) return notify.warning("제목을 입력해주세요.");
-    if (!rest.description) return notify.warning("내용을 입력해주세요.");
+    if (!rest.name) return notify.warning(["성함을 입력해주세요."]);
+    if (!rest.phone) return notify.warning(["연락처를 입력해주세요."]);
+    if (!time) return notify.warning(["시간을 선택해주세요."]);
+    if (!rest.fieldId) return notify.warning(["상담분야를 선택해주세요."]);
+    if (!rest.placeId) return notify.warning(["상담장소를 선택해주세요."]);
+    if (!rest.title) return notify.warning(["제목을 입력해주세요."]);
+    if (!rest.description) return notify.warning(["내용을 입력해주세요."]);
 
-    const result = { ...rest, reserveDate };
     const {
-      payload: { statusCode, message },
-    } = await dispatch(create(result));
-    if (statusCode !== 201) {
-      return notify.warning(message);
+      data: { statusCode, message },
+    } = await api.post("reserve", {
+      ...rest,
+      reserveDate,
+    });
+    if (statusCode === 201) {
+      notify.info(message);
+      return setState(initState);
     }
-    /**
-     * QUESTION
-     * 1. request 이후 상태변경은 어떻게 진행하는지. ( 데이터 변경, 페이지 이동, 알림 메시지 등 )
-     * */
-    notify.info("예약접수 되었습니다.");
-    setState(initState);
-    history.push("/");
+
+    notify.warning(message);
   };
 
   useEffect(() => {
@@ -138,18 +140,18 @@ const Index = () => {
         />
         <div className="flex flex-col my-6">
           <h6 className="mb-1">상담시간을 선택해주세요. *</h6>
-          {reservableTime.map((time, idx) => (
-            <label htmlFor={time} className={radioStyle} key={idx}>
+          {reservableTime.map(({ name, value }, idx) => (
+            <label htmlFor={name} className={radioStyle} key={idx}>
               <input
                 type="radio"
                 name="time"
-                id={time}
+                id={name}
                 onChange={() => {
-                  setState({ ...state, time: time });
+                  setState({ ...state, time: value });
                 }}
                 className="mr-1"
               />
-              {time}
+              {name}
             </label>
           ))}
         </div>

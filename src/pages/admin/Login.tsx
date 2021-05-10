@@ -14,8 +14,8 @@ const Login = () => {
 
   const login = () => {
     const { email, password } = loginForm;
-    if (!email) return notify.warning("아이디를 입력해주세요.");
-    if (!password) return notify.warning("비밀번호를 입력해주세요.");
+    if (!email) return notify.warning(["아이디를 입력해주세요."]);
+    if (!password) return notify.warning(["비밀번호를 입력해주세요."]);
     dispatch(userLogin(loginForm));
     //TODO history를 어떻게 처리할거야?
   };
