@@ -1,13 +1,7 @@
 import React from "react";
 import Header from "../shared/components/Header";
 import Banner from "../shared/components/Banner";
-import {
-  Redirect,
-  Route,
-  Switch,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Home from "./home";
 import Reserve from "./reserve";
 import TalkList from "./talk";
@@ -21,20 +15,17 @@ import Admin from "./admin";
 import Login from "./admin/Login";
 import NotFound from "../shared/components/NotFound";
 import Footer from "../shared/components/Footer";
-import { useAppSelector } from "../app/hooks";
-import { userSelector } from "../features/user/userSlice";
 
 const Root = () => {
   const { pathname } = useLocation();
-  const history = useHistory();
-  const { user } = useAppSelector(userSelector);
 
   if (pathname.includes("admin")) {
-    //TODO user가 null일때 어떻게 redirect ㅎㅏㄹ 수 있을까?
     return (
       <Switch>
         <Route path="/admin" exact component={Admin} />
         <Route path="/admin/login" component={Login} />
+        <Route path="/admin/404" component={NotFound} />
+        <Redirect path="/**" to="admin/404" />
       </Switch>
     );
   }
