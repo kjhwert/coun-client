@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "../shared/components/Header";
 import Banner from "../shared/components/Banner";
 import {
-  BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
