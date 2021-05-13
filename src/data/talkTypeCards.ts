@@ -1,5 +1,5 @@
-import { ITalkPaginationType } from "../features/talk/talk";
 import { TALK_GROWTH, TALK_REVIEW, TALK_WRITE } from "../shared/code";
+import { ITalkPaginationType } from "../features/talk/talkSlice";
 
 const talkGrowthBackgroundUrl =
   "https://images.unsplash.com/photo-1457530378978-8bac673b8062?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE3NjU0Nn0";

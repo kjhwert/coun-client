@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ITalkPagination } from "./talk";
 import { api } from "../../shared/api";
+import { ITalkPagination } from "./talkSlice";
 
 export const getTalks = createAsyncThunk(
   "talk/getTalks",

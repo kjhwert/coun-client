@@ -1,9 +1,44 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { TALK_GROWTH } from "../../shared/code";
-import { ITalkState } from "./talk";
+import {
+  I_TALK_GROWTH,
+  I_TALK_REVIEW,
+  I_TALK_WRITE,
+  TALK_GROWTH,
+} from "../../shared/code";
 import { notify } from "../../shared/notify";
 import { getTalk, getTalks } from "./talk.actions";
+
+export type ITalkPaginationType = I_TALK_GROWTH | I_TALK_REVIEW | I_TALK_WRITE;
+
+export interface ITalkPagination {
+  page: number;
+  type: ITalkPaginationType;
+}
+
+export interface ITalk {
+  createdAt: Date;
+  updatedAt: Date | null;
+  id: number;
+  title: string;
+  description: string | null;
+  youtubeUrl: string | null;
+  thumbnail: string;
+  imagePage: number;
+  imageOrder: number;
+  view: number;
+}
+
+export interface ITalkState {
+  talks: ITalk[];
+  selected: ITalk | undefined;
+  status: "idle" | "loading" | "failed";
+  pagination: {
+    page: number;
+    type: ITalkPaginationType;
+  };
+  totalCount: number;
+}
 
 const initialState: ITalkState = {
   talks: [],
@@ -47,8 +82,12 @@ export const talkSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getTalk.fulfilled, (state, { payload }) => {
-        state.status = "idle";
-        state.selected = payload;
+        if (payload === "") {
+          state.status = "failed";
+        } else {
+          state.status = "idle";
+          state.selected = payload;
+        }
       });
   },
 });

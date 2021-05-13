@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "../shared/components/Header";
 import Banner from "../shared/components/Banner";
 import {
-  BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
@@ -11,8 +10,6 @@ import {
 } from "react-router-dom";
 import Home from "./home";
 import Reserve from "./reserve";
-import TalkList from "./talk";
-import Talk from "./talk/Talk";
 import Profile from "./profile";
 import InterviewList from "./interview";
 import Interview from "./interview/Interview";
@@ -24,6 +21,8 @@ import NotFound from "../shared/components/NotFound";
 import Footer from "../shared/components/Footer";
 import { useAppSelector } from "../app/hooks";
 import { userSelector } from "../features/user/userSlice";
+import TalkListContainer from "./talk/TalkListContainer";
+import TalkContainer from "./talk/TalkContainer";
 
 const Root = () => {
   const { pathname } = useLocation();
@@ -47,8 +46,8 @@ const Root = () => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/reserve" component={Reserve} />
-        <Route path="/talk" exact component={TalkList} />
-        <Route path="/talk/:id" component={Talk} />
+        <Route path="/talk" exact component={TalkListContainer} />
+        <Route path="/talk/:id" component={TalkContainer} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/interview" exact component={InterviewList} />
         <Route path="/interview/:id" component={Interview} />
