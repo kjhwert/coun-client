@@ -27,8 +27,12 @@ export interface ILoginForm {
 export const userLogin = createAsyncThunk(
   "user/login",
   async (loginForm: ILoginForm) => {
-    const { data } = await api.post("user/login", loginForm);
-    return data;
+    try {
+      const { data } = await api.post("user/login", loginForm);
+      return data;
+    } catch (e) {
+      notify.warning([e.message]);
+    }
   }
 );
 
@@ -43,10 +47,7 @@ export const userSlice = createSlice({
       })
       .addCase(userLogin.fulfilled, (state, { payload }) => {
         state.status = "idle";
-        state.user = payload;
-      })
-      .addCase(userLogin.rejected, (state, action) => {
-        notify.warning("아이디 혹은 비밀번호가 일치하지 않습니다.");
+        state.user = payload.data;
       });
   },
 });

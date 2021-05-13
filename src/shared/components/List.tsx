@@ -1,12 +1,14 @@
 import React from "react";
-import { getDay, getMonth } from "../common";
+import { BASE_URL, getDay, getMonth } from "../common";
 import { Link } from "react-router-dom";
+import { Image } from "../../features/interview/interviewSlice";
 
 interface Item {
   id: number;
-  thumbnail: string;
+  thumbnail?: string;
   title: string;
   createdAt: Date;
+  image?: Image;
 }
 
 interface Props {
@@ -21,7 +23,11 @@ const List = ({ link, items }: Props) => {
         <Link to={`/${link}/${item.id}`} key={item.id} className="relative">
           <div className="mr-4 mb-4 cursor-pointer" style={{ width: 380 }}>
             <img
-              src={item.thumbnail}
+              src={
+                item.thumbnail
+                  ? item.thumbnail
+                  : `${BASE_URL}${item.image?.path}`
+              }
               style={{ height: 225 }}
               className="object-cover w-full rounded"
               alt={`${item.id}`}
