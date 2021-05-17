@@ -1,19 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import {
-  I_TALK_GROWTH,
-  I_TALK_REVIEW,
-  I_TALK_WRITE,
-  TALK_GROWTH,
-} from "../../shared/code";
 import { notify } from "../../shared/notify";
 import { getTalk, getTalks } from "./talk.actions";
-
-export type ITalkPaginationType = I_TALK_GROWTH | I_TALK_REVIEW | I_TALK_WRITE;
+import { ITALK, TALK_GROWTH } from "../../shared/global";
 
 export interface ITalkPagination {
   page: number;
-  type: ITalkPaginationType;
+  type: ITALK;
 }
 
 export interface ITalk {
@@ -35,7 +28,7 @@ export interface ITalkState {
   status: "idle" | "loading" | "failed";
   pagination: {
     page: number;
-    type: ITalkPaginationType;
+    type: ITALK;
   };
   totalCount: number;
 }

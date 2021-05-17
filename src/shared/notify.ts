@@ -7,16 +7,16 @@ const notifyOptions: ToastOptions = {
 };
 
 export const notify = {
-  info: (messages: string[]) => {
+  info: (messages: string[]): void => {
     messages.map((message) => toast.info(message, notifyOptions));
   },
-  success: (message: string) => {
+  success: (message: string): void => {
     toast.success(message, notifyOptions);
   },
-  warning: (messages: string[]) => {
+  warning: (messages: string[]): void => {
     messages.map((message) => toast.warning(message, notifyOptions));
   },
-  error: (message: string | undefined) => {
+  error: (message: string | undefined): void => {
     toast.error(message, notifyOptions);
   },
 };

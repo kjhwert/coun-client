@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import TalkListPresenter from "./TalkListPresenter";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import {
-  ITalkPaginationType,
-  talksSelector,
-} from "../../features/talk/talkSlice";
+import { talksSelector } from "../../features/talk/talkSlice";
 import { getTalks } from "../../features/talk/talk.actions";
 import Loading from "../../shared/components/Loading";
+import { ITALK } from "../../shared/global";
 
 const TalkListContainer = () => {
   const {
@@ -17,7 +15,7 @@ const TalkListContainer = () => {
   } = useAppSelector(talksSelector);
   const dispatch = useAppDispatch();
 
-  const getInitTalks = (page: number, type: ITalkPaginationType) => {
+  const getInitTalks = (page: number, type: ITALK) => {
     dispatch(getTalks({ page, type }));
   };
 

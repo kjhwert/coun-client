@@ -1,13 +1,14 @@
 import React, { FC } from "react";
 import List from "../../shared/components/List";
 import Pagination from "../../shared/components/Pagination";
-import { ITalk, ITalkPaginationType } from "../../features/talk/talkSlice";
+import { ITalk } from "../../features/talk/talkSlice";
 import talkTypeCard from "../../data/talkTypeCards";
+import { ITALK } from "../../shared/global";
 
 interface Props {
   talks: ITalk[];
   totalCount: number;
-  getInitTalks: (page: number, type: ITalkPaginationType) => void;
+  getInitTalks: (page: number, type: ITALK) => void;
   getMoreTalks: () => void;
 }
 
