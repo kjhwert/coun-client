@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { talksSelector } from "../../features/talk/talkSlice";
 import { getTalks } from "../../features/talk/talk.actions";
 import Loading from "../../shared/components/Loading";
-import { ITALK } from "../../shared/global";
+import { ITALK_TYPES } from "../../shared/global";
 
 const TalkListContainer = () => {
   const {
@@ -15,7 +15,7 @@ const TalkListContainer = () => {
   } = useAppSelector(talksSelector);
   const dispatch = useAppDispatch();
 
-  const getInitTalks = (page: number, type: ITALK) => {
+  const getInitTalks = (page: number, type: ITALK_TYPES) => {
     dispatch(getTalks({ page, type }));
   };
 

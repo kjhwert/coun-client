@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import Menu from "../../assets/icon/menu.png";
+import Menu from "../../assets/icon/menu.svg";
 
 const FOCUSED = "text-main-500 font-bold";
 const UNFOCUSED = "text-main-300";
@@ -29,8 +29,8 @@ const Header = () => {
   };
 
   return (
-    <div className="fixed top-0 z-20 w-full lg:h-20 h-16 bg-white shadow-xl flex lg:justify-end items-center lg:p-10 pl-6">
-      <img src={Menu} alt="" className="flex lg:hidden w-8 h-8" />
+    <div className="fixed top-0 z-20 w-full lg:h-20 h-14 bg-white shadow-xl flex lg:justify-end items-center lg:p-10 pl-4">
+      <img src={Menu} alt="" className="flex lg:hidden w-6 h-6" />
       <div className="items-center lg:flex hidden">
         <ul className="flex">
           {router.map(({ link, name }) => (

@@ -3,12 +3,12 @@ import List from "../../shared/components/List";
 import Pagination from "../../shared/components/Pagination";
 import { ITalk } from "../../features/talk/talkSlice";
 import talkTypeCard from "../../data/talkTypeCards";
-import { ITALK } from "../../shared/global";
+import { ITALK_TYPES } from "../../shared/global";
 
 interface Props {
   talks: ITalk[];
   totalCount: number;
-  getInitTalks: (page: number, type: ITALK) => void;
+  getInitTalks: (page: number, type: ITALK_TYPES) => void;
   getMoreTalks: () => void;
 }
 
@@ -20,21 +20,24 @@ const TalkListPresenter: FC<Props> = ({
 }) => {
   return (
     <div className="w-full flex items-center flex-col relative">
-      <div className="flex mt-4 mb-8 shadow-2xl bg-white flex-shrink-0 cursor-pointer">
+      <div
+        className={`w-full mt-4 mb-8 bg-white flex-shrink-0 lg:w-1/2 grid grid-cols-3 gap-x-2 px-2`}
+      >
         {talkTypeCard.map((card) => (
           <div
-            className="mr-2 flex items-center justify-center shadow-xl opacity-75"
+            className="cursor-pointer lg:mr-2 shadow-2xl items-center flex
+           shadow-xl opacity-75 w-full h-16 lg:h-36 justify-center"
             onClick={() => {
               getInitTalks(1, card.type);
             }}
             style={{
               backgroundImage: `url(${card.backgroundImageUrl})`,
-              width: 200,
-              height: 150,
             }}
             key={card.id}
           >
-            <h1 className="text-2xl font-bold text-white">{card.title}</h1>
+            <h1 className="lg:text-2xl text-lg font-bold text-white">
+              {card.title}
+            </h1>
           </div>
         ))}
       </div>

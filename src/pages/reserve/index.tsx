@@ -5,8 +5,8 @@ import { notify } from "../../shared/notify";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { codeStatus, getCodes } from "../../features/code/codeSlice";
 import Loading from "../../shared/components/Loading";
-import { RESERVE_FIELDS, RESERVE_PLACES } from "../../shared/code";
 import { api } from "../../shared/api";
+import { RESERVE_FIELDS, RESERVE_PLACES } from "../../shared/global";
 
 const inputStyle = `focus:outline-none text-sm focus:placeholder-transparent rounded-none
                         mb-6 border-b border-main-200 p-2 placeholder-main-200`;

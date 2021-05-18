@@ -18,34 +18,29 @@ interface Props {
 
 const List = ({ link, items }: Props) => {
   return (
-    <div className="flex flex-wrap ml-4" style={{ width: 1200 }}>
+    <div className="grid lg:grid-cols-3 gap-8 lg:gap-4 lg:w-web w-full grid-cols-1">
       {items.map((item) => (
-        <Link to={`/${link}/${item.id}`} key={item.id} className="relative">
-          <div className="mr-4 mb-4 cursor-pointer" style={{ width: 380 }}>
-            <img
-              src={
-                item.thumbnail
-                  ? item.thumbnail
-                  : `${BASE_URL}${item.image?.path}`
-              }
-              style={{ height: 225 }}
-              className="object-cover w-full rounded"
-              alt={`${item.id}`}
-            />
-            <h1 className="font-bold text-16 mt-2 text-center px-4">
-              {item.title}
-            </h1>
-            <div
-              className="absolute top-0 right-0 rounded-full
-              bg-main-400 flex flex-col w-10 h-10 items-center mr-8 mt-4 pt-1"
-            >
-              <span className="text-white text-12">
-                {getMonth(item.createdAt)},
-              </span>
-              <span className="text-white text-12">
-                {getDay(item.createdAt)}
-              </span>
-            </div>
+        <Link
+          to={`/${link}/${item.id}`}
+          key={item.id}
+          className="relative w-full lg:mr-4 cursor-pointer"
+        >
+          <img
+            src={
+              item.thumbnail ? item.thumbnail : `${BASE_URL}${item.image?.path}`
+            }
+            className="object-cover w-full rounded h-56"
+            alt={`${item.id}`}
+          />
+          <h1 className="font-bold text-16 mt-2 text-center">{item.title}</h1>
+          <div
+            className="absolute right-2 top-2 rounded-full z-10
+              bg-main-400 flex flex-col w-10 h-10 items-center pt-1"
+          >
+            <span className="text-white text-12">
+              {getMonth(item.createdAt)},
+            </span>
+            <span className="text-white text-12">{getDay(item.createdAt)}</span>
           </div>
         </Link>
       ))}

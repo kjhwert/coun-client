@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { notify } from "../../shared/notify";
 import { getTalk, getTalks } from "./talk.actions";
-import { ITALK, TALK_GROWTH } from "../../shared/global";
+import { ITALK_TYPES, TALK_GROWTH } from "../../shared/global";
 
 export interface ITalkPagination {
   page: number;
-  type: ITALK;
+  type: ITALK_TYPES;
 }
 
 export interface ITalk {
@@ -28,7 +28,7 @@ export interface ITalkState {
   status: "idle" | "loading" | "failed";
   pagination: {
     page: number;
-    type: ITALK;
+    type: ITALK_TYPES;
   };
   totalCount: number;
 }

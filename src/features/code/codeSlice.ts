@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../../shared/api";
 import { RootState } from "../../app/store";
+import { notify } from "../../shared/notify";
 import {
-  I_RESERVE_FIELDS,
-  I_RESERVE_PLACES,
+  IRESERVE_FIELDS,
+  IRESERVE_PLACES,
   RESERVE_FIELDS,
   RESERVE_PLACES,
-} from "../../shared/code";
-import { notify } from "../../shared/notify";
+} from "../../shared/global";
 
 export interface Code {
   id: number;
@@ -28,7 +28,7 @@ const initialState: CodeState = {
 
 export const getCodes = createAsyncThunk(
   "code/getCodes",
-  async (groupId: I_RESERVE_FIELDS | I_RESERVE_PLACES) => {
+  async (groupId: IRESERVE_FIELDS | IRESERVE_PLACES) => {
     const { data } = await api.get(`code?groupId=${groupId}`);
     return { data, groupId };
   }
