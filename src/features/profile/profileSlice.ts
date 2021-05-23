@@ -76,7 +76,10 @@ export const profileSlice = createSlice({
       })
       .addCase(getProfile.fulfilled, (state, { payload }) => {
         state.selected.status = "idle";
-        state.selected.profile = payload ? payload : null;
+        if (!payload) {
+          state.selected.status = "failed";
+        }
+        state.selected.profile = payload;
       });
   },
 });

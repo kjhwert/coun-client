@@ -23,15 +23,15 @@ const TalkContainer: FC<Props> = ({
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getTalk(Number(id)));
+    id && dispatch(getTalk(+id));
   }, [dispatch]);
 
-  if (status === "failed") {
-    return <NotFound />;
+  if (status === "loading") {
+    return <Loading />;
   }
 
-  if (!selected || status === "loading") {
-    return <Loading />;
+  if (!selected || status === "failed") {
+    return <NotFound />;
   }
   return <TalkPresenter selected={selected} />;
 };

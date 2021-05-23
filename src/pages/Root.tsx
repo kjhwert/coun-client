@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../shared/components/Header";
 import Banner from "../shared/components/Banner";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";

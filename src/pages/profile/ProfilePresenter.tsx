@@ -13,7 +13,7 @@ const ProfilePresenter: FC<Props> = ({
     <div className={`flex flex-col items-center py-8`}>
       <img
         src={`${BASE_URL}${image.path}`}
-        alt="image"
+        alt={image.name}
         className="rounded-full w-36 h-36"
       />
       <h3 className="py-6 font-semibold text-lg lg:text-xl">{name} 선생님</h3>

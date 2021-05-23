@@ -9,25 +9,34 @@ import Loading from "../../shared/components/Loading";
 import { useLocation } from "react-router-dom";
 import NotFound from "../../shared/components/NotFound";
 
-interface Props {}
+interface Props {
+  match: {
+    params: {
+      id: string | undefined;
+    };
+  };
+}
 
-const ProfileContainer: FC<Props> = () => {
+const ProfileContainer: FC<Props> = ({
+  match: {
+    params: { id },
+  },
+}) => {
   const { pathname } = useLocation();
-  const [_, route, id] = pathname.split("/");
   const {
     selected: { profile, status },
   } = useAppSelector(profileSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getProfile(+id));
+    id && dispatch(getProfile(+id));
   }, [dispatch]);
 
   if (status === "loading") {
     return <Loading />;
   }
 
-  if (!profile) {
+  if (status === "failed" || !profile) {
     return <NotFound />;
   }
 
