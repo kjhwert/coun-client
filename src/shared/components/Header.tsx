@@ -9,24 +9,26 @@ const UNFOCUSED = "text-main-300";
 interface IRouter {
   name: string;
   link: string;
+  path: string;
 }
 
 const router: IRouter[] = [
-  { name: "HOME", link: "/" },
-  { name: "THERAPISTS", link: "/profile" },
-  { name: "RESERVE", link: "/reserve" },
-  { name: "BLOG", link: "/talk" },
-  { name: "INTERVIEW", link: "/interview" },
-  { name: "GALLERY", link: "/gallery" },
+  { name: "HOME", link: "/", path: "home" },
+  { name: "THERAPISTS", link: "/profile", path: "profile" },
+  { name: "RESERVE", link: "/reserve", path: "reserve" },
+  { name: "BLOG", link: "/talk", path: "talk" },
+  { name: "INTERVIEW", link: "/interview", path: "interview" },
+  { name: "GALLERY", link: "/gallery", path: "gallery" },
 ];
 
 const Header = () => {
   const [isMenuClicked, setIsMenuClicked] = useState<boolean>(false);
   const { pathname } = useLocation();
+  const [_, route] = pathname.split("/");
   const history = useHistory();
 
-  const isFocused = (link: string): string => {
-    if (pathname === link) {
+  const isFocused = (path: string): string => {
+    if (route === path) {
       return FOCUSED;
     }
     return UNFOCUSED;
@@ -56,10 +58,10 @@ const Header = () => {
           className="w-6 h-6"
         />
         <ul className="flex flex-col mt-4">
-          {router.map(({ link, name }) => (
+          {router.map(({ link, name, path }) => (
             <li
               key={name}
-              className={`py-2 ${isFocused(link)}`}
+              className={`py-2 ${isFocused(path)}`}
               onClick={() => {
                 moveToLink(link);
               }}
@@ -84,18 +86,12 @@ const Header = () => {
       />
       <div className="items-center lg:flex hidden">
         <ul className="flex">
-          {router.map(({ link, name }) => (
-            <li className={`mr-4 cursor-pointer ${isFocused(link)}`} key={name}>
+          {router.map(({ link, name, path }) => (
+            <li className={`mr-4 cursor-pointer ${isFocused(path)}`} key={name}>
               <Link to={link}>{name}</Link>
             </li>
           ))}
         </ul>
-        {/*<Link*/}
-        {/*  to="/reserve"*/}
-        {/*  className="w-32 h-10 text-white rounded-full text-sm shadow-2xl focus:outline-none bg-main-400 flex justify-center items-center"*/}
-        {/*>*/}
-        {/*  상담예약*/}
-        {/*</Link>*/}
       </div>
     </div>
   );

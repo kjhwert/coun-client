@@ -4,7 +4,6 @@ import Banner from "../shared/components/Banner";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Home from "./home";
 import Reserve from "./reserve";
-import Profile from "./profile";
 import InterviewList from "./interview";
 import Interview from "./interview/Interview";
 import GalleryList from "./gallery";
@@ -16,6 +15,8 @@ import Footer from "../shared/components/Footer";
 import TalkListContainer from "./talk/TalkListContainer";
 import TalkContainer from "./talk/TalkContainer";
 import ReserveButton from "../shared/components/ReserveButton";
+import ProfileListContainer from "./profile/ProfileListContainer";
+import ProfileContainer from "./profile/ProfileContainer";
 
 const Root = () => {
   const { pathname } = useLocation();
@@ -41,7 +42,8 @@ const Root = () => {
         <Route path="/reserve" component={Reserve} />
         <Route path="/talk" exact component={TalkListContainer} />
         <Route path="/talk/:id" component={TalkContainer} />
-        <Route path="/profile" exact component={Profile} />
+        <Route path="/profile" exact component={ProfileListContainer} />
+        <Route path="/profile/:id" exact component={ProfileContainer} />
         <Route path="/interview" exact component={InterviewList} />
         <Route path="/interview/:id" component={Interview} />
         <Route path="/gallery" exact component={GalleryList} />

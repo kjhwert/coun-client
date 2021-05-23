@@ -21,33 +21,44 @@ export interface Profile {
   name: string;
   description: string;
   image: Image;
+  grade: string;
 }
 
 export interface ProfileState {
   profiles: Profile[];
-  selected: Profile | null;
+  selected: {
+    status: "idle" | "loading" | "failed";
+    profile: Profile | null;
+  };
   status: "idle" | "loading" | "failed";
 }
 
 const initialState: ProfileState = {
   profiles: [],
-  selected: null,
+  selected: {
+    status: "idle",
+    profile: null,
+  },
   status: "idle",
 };
 
-export const getProfiles = createAsyncThunk("user/getTeachers", async () => {
-  const { data } = await api.get("user/teacher");
+export const getProfiles = createAsyncThunk("user/getProfiles", async () => {
+  const { data } = await api.get("user/profiles");
   return data;
 });
+
+export const getProfile = createAsyncThunk(
+  "user/getProfile",
+  async (id: number) => {
+    const { data } = await api.get(`user/profile/${id}`);
+    return data;
+  }
+);
 
 export const profileSlice = createSlice({
   name: "profile",
   initialState,
-  reducers: {
-    onSelected: (state, { payload }) => {
-      state.selected = payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getProfiles.pending, (state) => {
@@ -56,14 +67,18 @@ export const profileSlice = createSlice({
       .addCase(getProfiles.fulfilled, (state, { payload }) => {
         state.status = "idle";
         state.profiles = payload;
-        state.selected = payload[0];
       })
       .addCase(getProfiles.rejected, (state, { error }) => {
         notify.error(error.message);
+      })
+      .addCase(getProfile.pending, (state) => {
+        state.selected.status = "loading";
+      })
+      .addCase(getProfile.fulfilled, (state, { payload }) => {
+        state.selected.status = "idle";
+        state.selected.profile = payload ? payload : null;
       });
   },
 });
-
-export const { onSelected } = profileSlice.actions;
 
 export const profileSelector = (state: RootState) => state.profile;
