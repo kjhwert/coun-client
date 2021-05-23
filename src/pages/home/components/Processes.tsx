@@ -1,20 +1,19 @@
 import React, { FC } from "react";
 import { processes } from "../../../data/process";
+import { MOBILE_PADDING } from "../../../shared/styles";
 
 interface Props {}
 
 const Processes: FC<Props> = () => {
   return (
     <div className="flex flex-col lg:w-web mx-auto lg:p-24 mt-10">
-      <div className="w-full flex flex-wrap lg:flex-nowrap justify-center lg:my-4">
-        {processes.map((process, idx) => (
+      <div
+        className={`w-full grid gap-2 grid-cols-2 ${MOBILE_PADDING} lg:flex lg:flex-nowrap lg:justify-center lg:my-4`}
+      >
+        {processes.map((process) => (
           <div
-            className={`w-36 lg:w-1/4 p-4 lg:mr-4 lg:mb-4 ${
-              idx % 2 === 0 && "mr-4"
-            } ${
-              idx <= 1 && "mb-4"
-            } bg-white shadow-lg border border-main-100 flex flex-col items-center rounded`}
-            key={idx}
+            className={`lg:w-1/4 p-4 lg:mr-4 lg:mb-4 bg-white shadow-lg border border-main-100 flex flex-col items-center rounded`}
+            key={process.title}
           >
             <img src={process.img} alt="img" className="w-24" />
             <span className="text-sm lg:text-lg text-center">

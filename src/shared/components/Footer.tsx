@@ -10,9 +10,8 @@ const Footer = () => {
         <br />
         골드프라자 305호 (동탄센트럴파크 옆)
       </span>
-      <span>
-        COPYRIGHT©Dongtan Family Counseling Center. ALL RIGHTS RESERVED.
-      </span>
+      <span>COPYRIGHT©Dongtan Family Counseling Center.</span>
+      <span>ALL RIGHTS RESERVED.</span>
       <a href="tel:031-613-6565">TEL: 031-613-6565</a>
     </div>
   );

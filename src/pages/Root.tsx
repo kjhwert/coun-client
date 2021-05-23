@@ -1,12 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../shared/components/Header";
 import Banner from "../shared/components/Banner";
-import {
-  Redirect,
-  Route,
-  Switch,
-  useLocation,
-} from "react-router-dom";
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Home from "./home";
 import Reserve from "./reserve";
 import Profile from "./profile";
@@ -20,6 +15,7 @@ import NotFound from "../shared/components/NotFound";
 import Footer from "../shared/components/Footer";
 import TalkListContainer from "./talk/TalkListContainer";
 import TalkContainer from "./talk/TalkContainer";
+import ReserveButton from "../shared/components/ReserveButton";
 
 const Root = () => {
   const { pathname } = useLocation();
@@ -39,6 +35,7 @@ const Root = () => {
     <>
       <Header />
       <Banner />
+      <ReserveButton />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/reserve" component={Reserve} />
